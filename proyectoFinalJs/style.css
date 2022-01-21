@@ -1,0 +1,17 @@
+body{
+    background-color: yellow;
+}
+h1,h2{
+    color: blue;
+    padding: 15px;
+}    
+h1{
+    text-align: center;
+}
+
+h2{
+    display: inline;
+    border: blue solid 2px;
+    border-radius: 5px;
+    font-size: 15pt;
+}

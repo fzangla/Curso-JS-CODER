@@ -26,6 +26,6 @@ if(numeroAleatorio==numeroIngreasdo)
 {
     alert("FELICITACIONES "+nombre+"! Usted acertó. El número correcto es " +numeroAleatorio);
 }else{
-    alert("Agotaste los intentos, "+nombre+". El número correcto era" +numeroAleatorio+". Suerte la próxima");
+    alert("Agotaste los intentos, "+nombre+". El número correcto era " +numeroAleatorio+". Suerte la próxima");
 }
     
