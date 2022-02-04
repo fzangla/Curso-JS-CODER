@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <p id="parrafo1">Esto es un texto</p>
+
+    <ul>
+        <li class="paises">Argentina</li>
+        <li class="paises">Colombia</li>
+        <li class="paises">Peru</li>
+        <li class="paises">Chile</li>
+        <li class="paises">Uruguay</li>
+    </ul>
+
+    <script>
+        let parrafo=document.createElement("p")
+        parrafo.innerHTML="<h3>Buena onda chiqui</h3> "
+        
+        document.body.append(parrafo)
+    
+        let parrafo1=document.getElementById("parrafo1")
+        parrafo1.remove()
+
+        let paises= document.getElementsByClassName("paises")
+        console.log(paises)
+        paises[1].remove()
+    
+    
+    
+    </script>
+
+</body>
+</html>

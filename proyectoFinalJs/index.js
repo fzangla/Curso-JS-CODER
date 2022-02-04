@@ -27,8 +27,8 @@
 class Pokemon{
     constructor(id, nombre, tipo, puntosDeVida, ataque, defensa, ataqueEspecial, defensaEspecial, velocidad){
         this.id=id;
-        this.nombre=nombre.toUpperCase();
-        this.tipo=tipo.toUpperCase();
+        this.nombre=nombre.toLocaleLowerCase();
+        this.tipo=tipo.toLocaleLowerCase();
         this.puntosDeVida=puntosDeVida;
         this.ataque=ataque;
         this.defensa=defensa;
@@ -41,6 +41,7 @@ class Pokemon{
 const arrayPokemon = []
 
 
+// POKEMON INICIALES
 const pikachu= new Pokemon (25, "Pikachu", "Electrico", 35, 55, 40, 50, 50, 90);
 
 const bulbasaur= new Pokemon (1, "Bulbasaur", "Planta", 50, 20, 60, 30, 60, 40); 
@@ -49,6 +50,7 @@ const charmander= new Pokemon (4, "Charmander", "Fuego", 30, 60, 30, 60, 20, 70)
 
 const squirtle= new Pokemon (7, "Squirtle", "Agua", 40, 50, 40, 45, 45, 55); 
 
+
 //Estan ordenados por numero de ID a propósito
 arrayPokemon.push(charmander);
 arrayPokemon.unshift(bulbasaur);
@@ -56,11 +58,52 @@ arrayPokemon.push(squirtle);
 arrayPokemon.push(pikachu);
 
 
-//Recorrido del array
-for(let i=0 ; i<arrayPokemon.length ; i++){
-    const elemento=arrayPokemon[i]
-    console.log(elemento);
+//recorro el array con datos que me importen (id, nombre)
+for( const referenciaPokemon of arrayPokemon) {
+    console.log(referenciaPokemon.nombre, referenciaPokemon.tipo)
 }
 
-//recorro el array con datos que me importen (id, nombre)
-for( const referenciaPokemon of arrayPokemon) console.log(referenciaPokemon.nombre, referenciaPokemon.tipo)
+
+
+//Utilizamos una funcion para saber los datos del pokemon que busco
+let salida="no";
+while(salida!="si")
+    {
+        const pokemonUsuario=prompt("Ingrese su pokemon: ").toLocaleLowerCase();
+        
+        let resultado = buscarPokemon(pokemonUsuario);
+        console.log(resultado);
+        
+        salida=prompt("Si desea SALIR escriba 'si'. En caso contrario escriba 'no'").toLocaleLowerCase();
+    }
+console.log("Gracias por usar nuestra pokedex");
+
+function buscarPokemon(pokemonUsuario)
+    {
+        // let pokemonElegido="";
+        let resultadoFind="";
+        switch(pokemonUsuario)
+        {
+                    case "pikachu":
+                        // pokemonElegido=console.log(arrayPokemon[3]);
+                        resultadoFind=arrayPokemon.find((obj) => obj.nombre == "pikachu");
+                        break;
+                    case "squirtle":
+                        // pokemonElegido=console.log(arrayPokemon[2]);
+                        resultadoFind=arrayPokemon.find((obj) => obj.nombre === "squirtle");
+                        break;
+                    case "charmander":
+                        // pokemonElegido=console.log(arrayPokemon[1]);
+                        resultadoFind=arrayPokemon.find((obj) => obj.nombre === "charmander");
+                        break;
+                    case "bulbasaur":
+                        // pokemonElegido=console.log(arrayPokemon[0]);
+                        resultadoFind=arrayPokemon.find((obj) => obj.nombre === "bulbasaur");
+                        break;
+                    default:
+                        console.log("No reconocemos ese pokemón.");
+                        break;
+        }
+        return resultadoFind;
+    }
+
