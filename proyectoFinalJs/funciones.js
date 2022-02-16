@@ -1,23 +1,18 @@
 function buscarPokemon(pokemonUsuario)
     {
-        // let pokemonElegido="";
         let resultadoFind="";
         switch(pokemonUsuario)
         {
                     case "pikachu":
-                        // pokemonElegido=console.log(arrayPokemon[3]);
-                        resultadoFind=arrayPokemon.find((obj) => obj.nombre == "pikachu");
+                        resultadoFind=arrayPokemon.find((obj) => obj.nombre === "pikachu");
                         break;
                     case "squirtle":
-                        // pokemonElegido=console.log(arrayPokemon[2]);
                         resultadoFind=arrayPokemon.find((obj) => obj.nombre === "squirtle");
                         break;
                     case "charmander":
-                        // pokemonElegido=console.log(arrayPokemon[1]);
                         resultadoFind=arrayPokemon.find((obj) => obj.nombre === "charmander");
                         break;
                     case "bulbasaur":
-                        // pokemonElegido=console.log(arrayPokemon[0]);
                         resultadoFind=arrayPokemon.find((obj) => obj.nombre === "bulbasaur");
                         break;
                     default:
@@ -26,3 +21,20 @@ function buscarPokemon(pokemonUsuario)
         }
         return resultadoFind;
     }
+
+function mostrar(identificador){
+    const pokemons = arrayPokemon.find(p=> p.identificador==identificador)
+
+    let contenedor=document.createElement("div") 
+        
+    contenedor.innerHTML = `
+    <h3> ${pokemons.identificador}, ${pokemons.nombre}: tipo ${pokemons.tipo}</h3> 
+    <p>Puntos de vida: ${pokemons.puntosDeVida}</p>
+    <p>Ataque: ${pokemons.ataque}</p>
+    <p>Defensa: ${pokemons.defensa}</p>
+    <p>Ataque Especial ${pokemons.ataqueEspecial}</p>
+    <p>Defensa Especial ${pokemons.defensaEspecial}</p>
+    <p>Velocidad: ${pokemons.velocidad}</p>`
+        
+    padre.appendChild(contenedor)
+}

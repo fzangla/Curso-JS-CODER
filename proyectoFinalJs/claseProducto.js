@@ -13,8 +13,8 @@ class Pokemon{
   }
 
 // POKEMON INICIALES
-const pikachu= new Pokemon (25, "Pikachu", "Electrico", 35, 55, 40, 50, 50, 90);
 
+const pikachu= new Pokemon (25, "Pikachu", "Electrico", 35, 55, 40, 50, 50, 90);
 const bulbasaur= new Pokemon (1, "Bulbasaur", "Planta", 50, 20, 60, 30, 60, 40); 
 
 const charmander= new Pokemon (4, "Charmander", "Fuego", 30, 60, 30, 60, 20, 70); 

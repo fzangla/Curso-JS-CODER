@@ -43,3 +43,20 @@ h2{
     display: inline-block;
     line-height: 1em;
   }
+  section{
+    display: inline-block;
+    width: 350px;
+    padding: 0 50%;
+  }
+  .fieldset{
+    display: grid;
+    grid-template-columns: 2;
+    grid-template-rows: 2;
+  }
+  .input{
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+  .botonBuscarPkm{
+    align-items: end;
+  }
