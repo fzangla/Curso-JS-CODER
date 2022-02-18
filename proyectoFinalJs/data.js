@@ -6,3 +6,6 @@ arrayPokemon.push(charmander);
 arrayPokemon.unshift(bulbasaur);
 arrayPokemon.push(squirtle);
 arrayPokemon.push(pikachu);
+
+
+let BAG =[]

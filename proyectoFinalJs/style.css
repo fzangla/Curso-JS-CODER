@@ -15,48 +15,31 @@ h2{
     border-radius: 5px;
     font-size: 15pt;
 }
-.ml14 {
-    font-weight: 200;
-    font-size: 3.2em;
-  }
-  
-  .ml14 .text-wrapper {
-    position: relative;
-    display: inline-block;
-    padding-top: 0.1em;
-    padding-right: 0.05em;
-    padding-bottom: 0.15em;
-  }
-  
-  .ml14 .line {
-    opacity: 0;
-    position: absolute;
-    left: 0;
-    height: 2px;
-    width: 100%;
-    background-color: #fff;
-    transform-origin: 100% 100%;
-    bottom: 0;
-  }
-  
-  .ml14 .letter {
-    display: inline-block;
-    line-height: 1em;
-  }
-  section{
-    display: inline-block;
-    width: 350px;
-    padding: 0 50%;
-  }
-  .fieldset{
-    display: grid;
-    grid-template-columns: 2;
-    grid-template-rows: 2;
-  }
-  .input{
-    grid-column-start: 1;
-    grid-column-end: 3;
-  }
-  .botonBuscarPkm{
-    align-items: end;
-  }
+
+/* #pokemones{
+ display: flex;
+ flex-direction: row;
+} */
+
+.cartaPokemon{
+  border: 2px solid blue;
+  width: 200px;
+  height: 130px;
+  text-align: center;
+  display: flex;
+  flex-direction:row
+}
+.cartaPokemonElegido{
+  display: flex;
+  flex-direction: row;
+}
+.añadirPokemon{
+  text-transform: uppercase;
+  padding: 3px 5px;
+  display: inline-block;
+}
+.añadirPokemon:hover{
+  color:white;
+  background-color: blue;
+  cursor: pointer;
+}

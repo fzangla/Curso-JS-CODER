@@ -22,19 +22,76 @@ function buscarPokemon(pokemonUsuario)
         return resultadoFind;
     }
 
-function mostrar(identificador){
-    const pokemons = arrayPokemon.find(p=> p.identificador==identificador)
-
-    let contenedor=document.createElement("div") 
-        
-    contenedor.innerHTML = `
-    <h3> ${pokemons.identificador}, ${pokemons.nombre}: tipo ${pokemons.tipo}</h3> 
-    <p>Puntos de vida: ${pokemons.puntosDeVida}</p>
-    <p>Ataque: ${pokemons.ataque}</p>
-    <p>Defensa: ${pokemons.defensa}</p>
-    <p>Ataque Especial ${pokemons.ataqueEspecial}</p>
-    <p>Defensa Especial ${pokemons.defensaEspecial}</p>
-    <p>Velocidad: ${pokemons.velocidad}</p>`
-        
-    padre.appendChild(contenedor)
-}
+//listado de pokemones atrapados
+const listaBag = () =>{
+    const divBag=document.querySelector("#pokemonElegido");
+  
+    let bagHTML= ""
+      
+    for(const pokemon of BAG){
+      bagHTML +=`
+      <div class="cartaPokemonElegido">
+      <b>${pokemon.nombre}</b> <br>
+      Tipo: ${pokemon.tipo} <br>
+      Vida: ${pokemon.puntosDeVida} <br>
+      Ataque: ${pokemon.ataque} <br>
+      Defensa: ${pokemon.defensa} <br>
+      Ataque Especial: ${pokemon.ataqueEspecial} <br>
+      Defensa: ${pokemon.defensaEspecial} <br>
+      Velocidad: ${pokemon.velocidad} <br>
+      `
+    }
+    divBag.innerHTML =bagHTML
+  
+  }
+  //listado de pokemones sueltos
+  const listaDePokemones = () =>{
+    const divPokemon=document.querySelector("#pokemones");
+  
+    let listaHTML= "";
+      
+    for(const pokemon of arrayPokemon){
+      listaHTML +=`
+      <div class="cartaPokemon">
+      <b>${pokemon.id}: ${pokemon.nombre}</b> <br>
+      Tipo: ${pokemon.tipo} <br>
+      Vida: ${pokemon.puntosDeVida} <br>
+      Ataque: ${pokemon.ataque} <br>
+      Defensa: ${pokemon.defensa} <br>
+      </div>
+      <div class="añadirPokemon" id="${pokemon.id}">
+        atrapar pokemon
+      </div>
+      `
+    }
+    divPokemon.innerHTML =listaHTML
+  
+    eventoAñadirPokemon()
+  }
+  const eventoAñadirPokemon=()=>{
+    const botonAtraparPokemon=document.getElementsByClassName("añadirPokemon")
+    for(const boton of botonAtraparPokemon){
+      boton.onclick=añadirPokemon 
+    }
+  }
+  
+  const añadirPokemon = e =>{
+    const id= e.target.id
+    const pokemon = arrayPokemon.find(p => p.id == id)
+    BAG.push(pokemon)
+    updateCache()
+    listaBag() 
+  }
+  
+  const updateCache = () =>{
+    const bagJSON= JSON.stringify(BAG)
+    localStorage.setItem("bag", bagJSON)
+  }
+  
+  const getCache = () =>{
+    bagJSON=localStorage.getItem("bag")
+    if(bagJSON) {
+      BAG=JSON.parse(bagJSON)
+    }
+    listaBag()
+  }

@@ -4,36 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <title>Pokedex</title>
 </head>
 <body>
-    <h1 class="ml14">
-        <span class="text-wrapper">
-            <span class="letters">Pokedex</span>
-            <span class="line"></span>
-        </span>
-    </h1>
-    <section>
-        <!-- <fieldset class="fieldset">
-            Busca tu pokemon por su nombre o ID
-            <input class="input" id="nombre" type="text" placeholder="Nombre del pokemón">
-            <button class="buscarPorNombre">Buscar Nombre</button>
-            <input class="input" id="id" type="number" placeholder="N° id del pokemón">
-            <button class="buscarPorId">Buscar ID</button>
-        </fieldset> -->
+    <h1>Pokedex</h1>
 
-        <button id="btn1">Mostrar datos de Bulbasaur</button><br>
+    <section class="container">
+        <div id="pokemones">
+            <!-- <div class="cartaPokemon"></div>
+            <div class="añadirPokemon"></div> -->
+        </div>
+
+
+        <!-- <button id="btn1">Mostrar datos de Bulbasaur</button><br>
         <button id="btn2">Mostrar datos de Charmander</button><br>
         <button id="btn3">Mostrar datos de Squirtle </button><br>
-        <button id="btn4">Mostrar datos de Pikachu </button><br>
-        <button id="btn5">Limpiar</button><br>
+        <button id="btn4">Mostrar datos de Pikachu </button><br> -->
+        <br><button id="btn5">Actualizar</button>
+        <!-- <div id="listaDePokemones"></div> -->
     </section>
+    <div id="pokemonElegido" class="container" > 
+        <h2>Pokemon elegido:</h2> 
+    </div>
+    
 
-
-    <div id="listaDePokemones"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     
     <script src="funciones.js"></script>
