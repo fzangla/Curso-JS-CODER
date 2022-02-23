@@ -89,7 +89,6 @@ const listaBag = () =>{
   const añadirPokemon = e =>{
     const id= e.target.id;
     const pokemon = arrayPokemon.find(p => p.id == id);
-    console.log(pokemon)
     BAG.push(pokemon);
     updateCache();
     listaBag();
@@ -107,4 +106,3 @@ const listaBag = () =>{
     }
     listaBag();
   }
-
