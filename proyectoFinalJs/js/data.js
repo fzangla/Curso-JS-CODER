@@ -1,4 +1,4 @@
-const arrayPokemon = []
+const arrayPokemon = [];
 
 
 //Estan ordenados por numero de ID a propósito
@@ -8,4 +8,4 @@ arrayPokemon.push(squirtle);
 arrayPokemon.push(pikachu);
 
 
-let BAG =[]
+let BAG =[];

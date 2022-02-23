@@ -21,14 +21,7 @@ h2{
  flex-direction: row;
 } */
 
-.cartaPokemon{
-  border: 2px solid blue;
-  width: 200px;
-  height: 130px;
-  text-align: center;
-  display: flex;
-  flex-direction:row
-}
+
 .cartaPokemonElegido{
   display: flex;
   flex-direction: row;
@@ -42,4 +35,19 @@ h2{
   color:white;
   background-color: blue;
   cursor: pointer;
+}
+.center{
+  display: flex;
+  justify-content: center;
+}
+#pokemones{
+  display: flex;
+  justify-content: space-between;
+}
+#btn5{
+  margin-bottom: 10px;
+}
+.nav{
+  display: flex;
+  justify-content: space-around;
 }

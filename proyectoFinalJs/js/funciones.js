@@ -30,18 +30,25 @@ const listaBag = () =>{
       
     for(const pokemon of BAG){
       bagHTML +=`
-      <div class="cartaPokemonElegido">
+      <div class="center">
+      <div class="card" style="width: 18rem;">
+      <img src="img/${pokemon.nombre}.png" alt="${pokemon.nombre}" class="card-img-top" height=300px>
+      <div class="cartaPokemonElegido card">
+      <div class="card-body">
       <b>${pokemon.nombre}</b> <br>
-      Tipo: ${pokemon.tipo} <br>
+      <p class="card-text">Tipo: ${pokemon.tipo} <br>
       Vida: ${pokemon.puntosDeVida} <br>
       Ataque: ${pokemon.ataque} <br>
       Defensa: ${pokemon.defensa} <br>
       Ataque Especial: ${pokemon.ataqueEspecial} <br>
       Defensa: ${pokemon.defensaEspecial} <br>
-      Velocidad: ${pokemon.velocidad} <br>
+      Velocidad: ${pokemon.velocidad} <br> </p>
+      </div>
+      </div>
+      </div>
       `
     }
-    divBag.innerHTML =bagHTML
+    divBag.innerHTML =bagHTML;
   
   }
   //listado de pokemones sueltos
@@ -51,47 +58,53 @@ const listaBag = () =>{
     let listaHTML= "";
       
     for(const pokemon of arrayPokemon){
-      listaHTML +=`
-      <div class="cartaPokemon">
-      <b>${pokemon.id}: ${pokemon.nombre}</b> <br>
-      Tipo: ${pokemon.tipo} <br>
-      Vida: ${pokemon.puntosDeVida} <br>
-      Ataque: ${pokemon.ataque} <br>
-      Defensa: ${pokemon.defensa} <br>
-      </div>
-      <div class="añadirPokemon" id="${pokemon.id}">
-        atrapar pokemon
-      </div>
+      listaHTML +=` 
+      <div class="card w-25">
+          <div class="card-body">
+            <h5 class="card-title">${pokemon.id}: ${pokemon.nombre}</h5>
+            <p class="card-text"> Tipo: ${pokemon.tipo} </p>
+            </div>
+            <div class="añadirPokemon btn btn-primary" id="${pokemon.id}">Elegir pokemón inicial</div>
+          </div>
+        </div>
       `
+      // <p class="card-text"> Tipo: ${pokemon.tipo} <br>
+      // Vida: ${pokemon.puntosDeVida} <br>
+      // Ataque: ${pokemon.ataque} <br>
+      // Defensa: ${pokemon.defensa} <br>
+      // </p>
     }
-    divPokemon.innerHTML =listaHTML
+    divPokemon.innerHTML =listaHTML;
   
     eventoAñadirPokemon()
-  }
+  }  
+  
   const eventoAñadirPokemon=()=>{
-    const botonAtraparPokemon=document.getElementsByClassName("añadirPokemon")
-    for(const boton of botonAtraparPokemon){
-      boton.onclick=añadirPokemon 
-    }
+       const botonAtraparPokemon=document.getElementsByClassName("añadirPokemon");
+        for(const boton of botonAtraparPokemon){
+          boton.onclick=añadirPokemon;
+      }
   }
   
   const añadirPokemon = e =>{
-    const id= e.target.id
-    const pokemon = arrayPokemon.find(p => p.id == id)
-    BAG.push(pokemon)
-    updateCache()
-    listaBag() 
+    const id= e.target.id;
+    const pokemon = arrayPokemon.find(p => p.id == id);
+    console.log(pokemon)
+    BAG.push(pokemon);
+    updateCache();
+    listaBag();
   }
   
   const updateCache = () =>{
-    const bagJSON= JSON.stringify(BAG)
-    localStorage.setItem("bag", bagJSON)
+    const bagJSON= JSON.stringify(BAG);
+    localStorage.setItem("bag", bagJSON);
   }
   
   const getCache = () =>{
-    bagJSON=localStorage.getItem("bag")
+    bagJSON=localStorage.getItem("bag");
     if(bagJSON) {
-      BAG=JSON.parse(bagJSON)
+      BAG=JSON.parse(bagJSON);
     }
-    listaBag()
+    listaBag();
   }
+
