@@ -51,3 +51,8 @@ h2{
   display: flex;
   justify-content: space-around;
 }
+
+.toastifyError{
+  border-radius: 5px;
+  background: linear-gradient(to right, black, red, black);
+}
