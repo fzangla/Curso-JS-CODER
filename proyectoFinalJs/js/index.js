@@ -7,7 +7,7 @@ btn5.addEventListener('click', _ => location.reload());
 getCache();
 listaDePokemones();
 
-askName();
+// askName();
 
 
 
