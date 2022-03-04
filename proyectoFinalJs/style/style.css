@@ -1,6 +1,9 @@
 body{
     background-color: yellow;
 }
+p,h1,h2,h3,h4,h5{
+  font-family: 'Lato', sans-serif;
+}
 h1,h2{
     color: blue;
     padding: 15px;
@@ -15,48 +18,19 @@ h2{
     border-radius: 5px;
     font-size: 15pt;
 }
-
-/* #pokemones{
- display: flex;
- flex-direction: row;
-} */
-
-
-.cartaPokemonElegido{
-  display: flex;
-  flex-direction: row;
+.pokemon-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+  margin-top: 20px;
 }
-.añadirPokemon{
-  text-transform: uppercase;
-  padding: 3px 5px;
-  display: inline-block;
-}
-.añadirPokemon:hover{
-  color:white;
-  background-color: blue;
-  cursor: pointer;
-}
-.center{
-  display: flex;
-  justify-content: center;
-}
-#pokemones{
-  display: flex;
-  justify-content: space-between;
-}
-#btn5{
-  margin-bottom: 10px;
-}
-.nav{
-  display: flex;
-  justify-content: space-around;
-}
-
-.toastifyError{
-  border-radius: 5px;
-  background: linear-gradient(to right, black, red, black);
-}
-
-.form{
-  padding-top: 22px;
+.pokemon-block {
+  border-radius: 10px;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
 }

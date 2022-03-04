@@ -160,6 +160,7 @@ const namePokemonTrainer = () => {
   return trainerNameJSON;
 };
 
+//Desafio: Fetch en tu proyecto
 
 const updateCacheTrainer = () => {
   const trainerNameJSON = JSON.stringify(PKM_TRAINER);
@@ -181,3 +182,59 @@ const askName = () => {
   }
 }
 
+const fetchPokemon= (id) => {
+  fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+  .then( (response => response.json() ) )
+  .then((data) => {
+      createPokemon(data);
+  })
+}
+
+const fetchPokemons = (number) => {
+  for (let i=1; i<=number; i++){
+      fetchPokemon(i);
+  }
+}
+
+const createPokemon = (pokemon) => {
+  const card = document.createElement('div');
+  card.classList.add('pokemon-block');
+  
+  
+  const spriteContainer = document.createElement('div');
+  spriteContainer.classList.add('imgContainer');
+
+  const sprite = document.createElement('img');
+  sprite.src=pokemon.sprites.front_default
+
+  spriteContainer.appendChild(sprite);
+
+  const number = document.createElement('p');
+  number.textContent = `N° ${pokemon.id}`;
+
+  const name = document.createElement('b'); 
+  name.classList.add('name');
+  name.textContent = pokemon.name.toUpperCase()
+
+
+  card.appendChild(spriteContainer);
+  card.appendChild(number);
+  card.appendChild(name);
+
+  pokemonContainer.appendChild(card);
+}
+
+const searchPokemon = event => {
+  event.preventDefault();
+  const {value} = event.target.pokemon;
+  fetch(`https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`)
+  .then(data => data.json())
+  .then(response => responsePokeData(response))
+  .catch( (error)=> {
+      console.log('No se encuentra el pokemon deseado', error) 
+  } )
+}
+const responsePokeData = data => {
+  const { stats, types} = data
+  console.log(data)
+}
