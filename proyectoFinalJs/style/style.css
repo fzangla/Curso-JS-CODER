@@ -1,36 +1,182 @@
-body{
-    background-color: yellow;
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+a {
+    font-family: 'Lato', sans-serif;
 }
-p,h1,h2,h3,h4,h5{
-  font-family: 'Lato', sans-serif;
-}
-h1,h2{
-    color: blue;
+
+h1,
+h2 {
+    color: #383b4f;
     padding: 15px;
-}    
-h1{
+}
+
+h1 {
     text-align: center;
 }
 
-h2{
+h2 {
     display: inline;
     border: blue solid 2px;
     border-radius: 5px;
     font-size: 15pt;
 }
-.pokemon-container{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 30px;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 40px;
-  margin-top: 20px;
+
+.link {
+    text-decoration: none;
 }
+
+.pokemon-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
 .pokemon-block {
-  border-radius: 10px;
-  padding: 10px;
-  background-color: white;
-  box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+}
+
+
+/*** INICIO INDEX-ENTRADA ***/
+
+body {
+    background-color: snow;
+    padding: 0;
+    margin: 0;
+}
+
+.textCenter {
+    text-align: justify;
+}
+
+.textCenter1 {
+    text-align: center;
+}
+
+.containerPokeball {
+    margin-top: -170px;
+    margin-bottom: -120px;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pokeball {
+    height: 250px;
+    width: 250px;
+    border: 13px solid #383b4f;
+    border-radius: 50%;
+    background-image: linear-gradient( #f51939 125px, white 125px);
+    position: relative;
+    animation: load 1s infinite;
+}
+
+@keyframes load {
+    50% {
+        transform: scale(0.9);
+    }
+}
+
+.pokeball:before {
+    position: absolute;
+    content: "";
+    height: 25px;
+    width: 100%;
+    background-color: #383b4f;
+    top: 112.5px;
+}
+
+.pokeball:after {
+    position: absolute;
+    content: "";
+    height: 90px;
+    width: 90px;
+    background-image: radial-gradient( #ffffff 0px, #ffffff 10px, #383b4f 10px, #383b4f 15px, #ffffff 15px, #ffffff 32px, #383b4f 32px);
+    border-radius: 50px;
+    top: 80px;
+    left: 69px;
+}
+
+a {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
+
+/*** FIN INDEX ***/
+
+form {
+    width: 200px;
+    margin: 20px auto;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+}
+
+.poke-card {
+    position: relative;
+    height: fit-content;
+    max-width: 300px;
+    border-radius: 4px;
+    color: #000;
+    text-align: center;
+    padding: 10px;
+    margin: 0 auto;
+    background-color: #FFF;
+    border: 1px solid black;
+}
+
+.poke-card::before {
+    content: '';
+    background: radial-gradient(black 33%, transparent 33%);
+    background-size: 3px 3px;
+    border-radius: 4px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    z-index: -1;
+}
+
+.img-container {
+    position: relative;
+    width: 180px;
+    margin: 10px auto;
+}
+
+.poke-stats div {
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+    padding: 5px;
+    font-size: 18px;
+}
+
+.poke-types div {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 4px;
+    border: 1px dashed black;
+}
+
+.poke-img {
+    width: 180px;
+    border-radius: 50%;
 }
