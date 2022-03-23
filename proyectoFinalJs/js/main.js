@@ -1,6 +1,6 @@
 const pokemonContainer = document.querySelector('.pokemon-container');
 
-fetchPokemons(6);
+fetchPokemons(151);
 
 console.log("Gracias por usar nuestra pokedex");
 
@@ -13,7 +13,7 @@ const pokeTypes = document.querySelector('[data-poke-types]');
 const pokeStats = document.querySelector('[data-poke-stats]');
 
 const typeColors = {
-    electric: '#FFEA70',
+    electric: '#ADB218',
     normal: '#B09398',
     fire: '#FF675C',
     water: '#0596C7',
@@ -31,15 +31,3 @@ const typeColors = {
     fighting: '#2F2F2F',
     default: '#2A1A1F',
 };
-
-
-
-// const btn5 = document.getElementById("btn5")
-// const reload = document.getElementById('reload');
-// btn5.addEventListener('click', _ => location.reload());
-
-getCache();
-listaDePokemones();
-
-
-// askName();

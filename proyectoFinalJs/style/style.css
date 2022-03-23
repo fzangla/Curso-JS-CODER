@@ -25,58 +25,18 @@ h2 {
     font-size: 15pt;
 }
 
-.link {
-    text-decoration: none;
-}
-
-.pokemon-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 40px;
-    margin-top: 20px;
-}
-
-.pokemon-block {
-    border-radius: 10px;
-    padding: 15px;
-    background-color: white;
-    box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
-}
-
-.imgContainer {
-    background-color: #383b4f;
-    border-radius: 50%;
-}
-
-
-/*** INICIO INDEX-ENTRADA ***/
-
 body {
     background-color: snow;
     padding: 0;
     margin: 0;
 }
 
+
+/*INICIO - INDEX*/
+
 .textCenter {
-    text-align: justify;
-}
-
-.textCenter1 {
     text-align: center;
-}
-
-.containerPokeball {
-    margin-top: -170px;
-    margin-bottom: -120px;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-top: 50px;
 }
 
 .pokeball {
@@ -86,7 +46,7 @@ body {
     border-radius: 50%;
     background-image: linear-gradient( #f51939 125px, white 125px);
     position: relative;
-    animation: load 1s infinite;
+    animation: load 2s infinite;
 }
 
 @keyframes load {
@@ -115,14 +75,49 @@ body {
     left: 69px;
 }
 
+.containerPokeball {
+    margin-top: -170px;
+    margin-bottom: -120px;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/*FIN - INDEX*/
+
+.pokemon-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+    .pokemon-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.pokemon-block {
+    border-radius: 10px;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+}
+
 a {
     display: flex;
     justify-content: center;
     text-decoration: none;
 }
-
-
-/*** FIN INDEX ***/
 
 form {
     width: 200px;

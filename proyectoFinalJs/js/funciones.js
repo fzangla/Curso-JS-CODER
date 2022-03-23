@@ -1,141 +1,8 @@
-//************
-// Segun el pokemon que ingrese el usuario devuelve el pokemon hallado
-// Solo sirve para el array creado (pikachu, bulbasaur, squirtle y charmander)
-//////////////
-function buscarPokemon(pokemonUsuario) {
-    let resultadoFind = "";
-    switch (pokemonUsuario) {
-        case "pikachu":
-            resultadoFind = arrayPokemon.find((obj) => obj.nombre === "pikachu");
-            break;
-        case "squirtle":
-            resultadoFind = arrayPokemon.find((obj) => obj.nombre === "squirtle");
-            break;
-        case "charmander":
-            resultadoFind = arrayPokemon.find((obj) => obj.nombre === "charmander");
-            break;
-        case "bulbasaur":
-            resultadoFind = arrayPokemon.find((obj) => obj.nombre === "bulbasaur");
-            break;
-        default:
-            console.log("No reconocemos ese pokemón.");
-            break;
-    }
-    return resultadoFind;
-}
-//************
-//muestra en el DOM los pokemones atrapados en la mochila
-//////////////
-const listaBag = () => {
-        const divBag = document.querySelector("#pokemonElegido");
-
-        let bagHTML = ""
-
-        for (const pokemon of BAG) {
-            bagHTML += `
-      <div class="center">
-      <div class="card" style="width: 18rem;">
-      <img src="img/${pokemon.nombre}.png" alt="${pokemon.nombre}" class="card-img-top" height=300px>
-      <div class="cartaPokemonElegido card">
-      <div class="card-body">
-      <b>${pokemon.nombre}</b> <br>
-      <p class="card-text">Tipo: ${pokemon.tipo} <br>
-      Vida: ${pokemon.puntosDeVida} <br>
-      Ataque: ${pokemon.ataque} <br>
-      Defensa: ${pokemon.defensa} <br>
-      Ataque Especial: ${pokemon.ataqueEspecial} <br>
-      Defensa: ${pokemon.defensaEspecial} <br>
-      Velocidad: ${pokemon.velocidad} <br> </p>
-      </div>
-      </div>
-      </div>
-      `
-        }
-        divBag.innerHTML = bagHTML;
-
-    }
-    //************
-    //listado de pokemones sueltos/sin atrapar
-    //////////////    
-const listaDePokemones = () => {
-    const divPokemon = document.querySelector("#pokemones");
-
-    let listaHTML = "";
-
-    for (const pokemon of arrayPokemon) {
-        listaHTML += ` 
-      <div class="card w-25">
-          <div class="card-body">
-            <h5 class="card-title">${pokemon.id}: ${pokemon.nombre}</h5>
-            <p class="card-text"> Tipo: ${pokemon.tipo} </p>
-            </div>
-            <div class="añadirPokemon btn btn-primary" id="${pokemon.id}">Elegir pokemón inicial</div>
-          </div>
-        </div>
-      `
-    }
-    divPokemon.innerHTML = listaHTML;
-
-    eventoAñadirPokemon()
-
-}
+/////////---INICIO MOSTRAR POKEMONES
 
 //************
-// Mediante click en el boton añade un pokemon a la lista
+// Llamo a la api y obtengo el pokemon segun el id que completo
 //////////////
-const eventoAñadirPokemon = () => {
-        const botonAtraparPokemon = document.getElementsByClassName("añadirPokemon");
-        for (const boton of botonAtraparPokemon) {
-            boton.onclick = añadirPokemon;
-        }
-        console.log(añadirPokemon)
-
-    }
-    //************
-    // mediante click consulta si quieres atrapar al pokemon o no
-    //////////////
-const añadirPokemon = e => {
-        const id = e.target.id;
-        const pokemon = arrayPokemon.find(p => p.id == id);
-        swal({
-                title: `Seleccionaste a ${pokemon.nombre}`,
-                text: "Una vez elegido no podrás volver atrás. ¿Desea continuar?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: false,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    swal(`Elegiste a ${pokemon.nombre} como parte de tu equipo pokemon`, "¡Descubre sus habilidades!", "success");
-                    BAG.push(pokemon)
-                    updateCache();
-                    listaBag();
-                } else {
-                    swal("No elegiste ningún pokemon inicial", "Elija uno", "error");
-                }
-            });
-    }
-    //************
-    // actualiza el cache
-    //////////////
-const updateCache = () => {
-    const bagJSON = JSON.stringify(BAG);
-    localStorage.setItem("bag", bagJSON);
-}
-
-//************
-// obtiene el cache guardado
-//////////////
-const getCache = () => {
-        bagJSON = localStorage.getItem("bag");
-        if (bagJSON) {
-            BAG = JSON.parse(bagJSON);
-        }
-        listaBag();
-    }
-    //************
-    // Llamo a la api y obtengo el pokemon segun el id que completo
-    //////////////
 const fetchPokemon = (id) => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
         .then((response => response.json()))
@@ -148,10 +15,14 @@ const fetchPokemon = (id) => {
 // establezco un numero hasta el cual quiero mostrar el id de cada pokemon
 //////////////
 const fetchPokemons = (number) => {
-    for (let i = 1; i <= number; i++) {
-        fetchPokemon(i);
+        for (let i = 1; i <= number; i++) {
+            fetchPokemon(i);
+        }
     }
-}
+    /////////---FIN MOSTRAR POKEMONES
+
+
+/////////---INICIO BUSCADOR POKEMON + CARD
 
 //************
 // creo una mini-card de pokemon con la imagen, id y nombre
@@ -162,7 +33,7 @@ const createPokemon = (pokemon) => {
 
 
     const spriteContainer = document.createElement('div');
-    spriteContainer.classList.add('imgContainer');
+
 
     const sprite = document.createElement('img');
     sprite.src = pokemon.sprites.front_default
@@ -174,38 +45,18 @@ const createPokemon = (pokemon) => {
 
     const name = document.createElement('b');
     name.classList.add('name');
-    name.textContent = pokemon.name.toUpperCase()
+    name.textContent = pokemon.name.toUpperCase();
 
-    const btnAddPkm = document.createElement('button');
-    btnAddPkm.classList.add('btnAddPkm');
-    btnAddPkm.textContent = `Añadir a mi equipo`
-
-
-    card.appendChild(spriteContainer);
     card.appendChild(number);
+    card.appendChild(spriteContainer);
     card.appendChild(name);
-    card.appendChild(btnAddPkm);
-
     pokemonContainer.appendChild(card);
-    addEventPokemon()
 }
 
 
-const addEventPokemon = () => {
-    const btnAddPkm = document.getElementsByClassName('btnAddPkm')
-    for (const btn of btnAddPkm) {
-        btn.onclick = addPokemon
-    }
-}
-
-const addPokemon = e => {
-        const id = e.target.id
-        const number = data.find(p => p.id == id)
-        console.log(number)
-    }
-    //************
-    // busca el pokemon para mostrar la card
-    //////////////
+//************
+// busca el pokemon para mostrar la card
+//////////////
 const searchPokemon = event => {
     event.preventDefault();
     const { value } = event.target.pokemon;
@@ -221,7 +72,6 @@ const searchPokemon = event => {
 const renderPokemonData = data => {
     const sprite = data.sprites.front_default;
     const { stats, types } = data;
-
     pokeName.textContent = data.name;
     pokeImg.setAttribute('src', sprite);
     pokeId.textContent = `Nº ${data.id}`;
@@ -274,10 +124,154 @@ const renderPokemonStats = stats => {
 // si no encuentra el pokemon muestra una carga anunciando que no encontro el pokemon
 //////////////
 const renderNotFound = () => {
-    pokeName.textContent = 'No encontrado';
-    pokeImg.setAttribute('src', './img/silueta.png');
-    pokeImg.style.background = '#fff';
-    pokeTypes.innerHTML = '';
-    pokeStats.innerHTML = '';
-    pokeId.textContent = '';
-}
+        pokeImg.setAttribute('src', './img/silueta.png');
+        pokeImg.style.background = '#fff';
+        pokeTypes.innerHTML = '';
+        pokeStats.innerHTML = '';
+        pokeId.textContent = '';
+
+        swal({
+            icon: "error",
+            title: "No se encuentra el pokemon"
+        });
+
+    }
+    /////////---FIN BUSCADOR POKEMON + CARD
+
+
+// funciones no utilizadas
+
+//************
+// Segun el pokemon que ingrese el usuario devuelve el pokemon hallado
+// Solo sirve para el array creado (pikachu, bulbasaur, squirtle y charmander)
+//////////////
+// function buscarPokemon(pokemonUsuario) {
+//   let resultadoFind = "";
+//   switch (pokemonUsuario) {
+//       case "pikachu":
+//           resultadoFind = arrayPokemon.find((obj) => obj.nombre === "pikachu");
+//           break;
+//       case "squirtle":
+//           resultadoFind = arrayPokemon.find((obj) => obj.nombre === "squirtle");
+//           break;
+//       case "charmander":
+//           resultadoFind = arrayPokemon.find((obj) => obj.nombre === "charmander");
+//           break;
+//       case "bulbasaur":
+//           resultadoFind = arrayPokemon.find((obj) => obj.nombre === "bulbasaur");
+//           break;
+//       default:
+//           console.log("No reconocemos ese pokemón.");
+//           break;
+//   }
+//   return resultadoFind;
+// }
+//************
+//muestra en el DOM los pokemones atrapados en la mochila
+//////////////
+// const listaBag = () => {
+//     const divBag = document.querySelector("#pokemonElegido");
+
+//     let bagHTML = ""
+
+//     for (const pokemon of BAG) {
+//         bagHTML += `
+//       <div class="center">
+//       <div class="card" style="width: 18rem;">
+//       <img src="img/${pokemon.nombre}.png" alt="${pokemon.nombre}" class="card-img-top" height=300px>
+//       <div class="cartaPokemonElegido card">
+//       <div class="card-body">
+//       <b>${pokemon.nombre}</b> <br>
+//       <p class="card-text">Tipo: ${pokemon.tipo} <br>
+//       Vida: ${pokemon.puntosDeVida} <br>
+//       Ataque: ${pokemon.ataque} <br>
+//       Defensa: ${pokemon.defensa} <br>
+//       Ataque Especial: ${pokemon.ataqueEspecial} <br>
+//       Defensa: ${pokemon.defensaEspecial} <br>
+//       Velocidad: ${pokemon.velocidad} <br> </p>
+//       </div>
+//       </div>
+//       </div>
+//       `
+//     }
+//     divBag.innerHTML = bagHTML;
+
+// }
+//************
+//listado de pokemones sueltos/sin atrapar
+//////////////    
+// const listaDePokemones = () => {
+//     const divPokemon = document.querySelector("#pokemones");
+
+//     let listaHTML = "";
+
+//     for (const pokemon of arrayPokemon) {
+//         listaHTML += ` 
+//       <div class="card w-25">
+//           <div class="card-body">
+//             <h5 class="card-title">${pokemon.id}: ${pokemon.nombre}</h5>
+//             <p class="card-text"> Tipo: ${pokemon.tipo} </p>
+//             </div>
+//             <div class="añadirPokemon btn btn-primary" id="${pokemon.id}">Elegir pokemón inicial</div>
+//           </div>
+//         </div>
+//       `
+//     }
+//     divPokemon.innerHTML = listaHTML;
+//     eventoAñadirPokemon()
+// }
+//
+//
+//************
+// Mediante click en el boton añade un pokemon a la lista
+//////////////
+// const eventoAñadirPokemon = () => {
+//   const botonAtraparPokemon = document.getElementsByClassName("añadirPokemon");
+//   for (const boton of botonAtraparPokemon) {
+//       boton.onclick = añadirPokemon;
+//   }
+//   console.log(añadirPokemon);
+
+// }
+// //************
+// // mediante click consulta si quieres atrapar al pokemon o no
+// //////////////
+// const añadirPokemon = e => {
+// const id = e.target.id;
+// const pokemon = arrayPokemon.find(p => p.id == id);
+// swal({
+//       title: `Seleccionaste a ${pokemon.nombre}`,
+//       text: "Una vez elegido no podrás volver atrás. ¿Desea continuar?",
+//       icon: "warning",
+//       buttons: true,
+//       dangerMode: false,
+//   })
+//   .then((willDelete) => {
+//       if (willDelete) {
+//           swal(`Elegiste a ${pokemon.nombre} como parte de tu equipo pokemon`, "¡Descubre sus habilidades!", "success");
+//           BAG.push(pokemon)
+//           updateCache();
+//           listaBag();
+//       } else {
+//           swal("No elegiste ningún pokemon inicial", "Elija uno", "error");
+//       }
+//   });
+// }
+//************
+// actualiza el cache
+//////////////
+// const updateCache = () => {
+//     const bagJSON = JSON.stringify(BAG);
+//     localStorage.setItem("bag", bagJSON);
+// }
+
+// //************
+// // obtiene el cache guardado
+// //////////////
+// const getCache = () => {
+//     bagJSON = localStorage.getItem("bag");
+//     if (bagJSON) {
+//         BAG = JSON.parse(bagJSON);
+//     }
+//     listaBag();
+// }
