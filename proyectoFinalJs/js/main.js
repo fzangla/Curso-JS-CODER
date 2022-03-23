@@ -1,6 +1,6 @@
 const pokemonContainer = document.querySelector('.pokemon-container');
 
-fetchPokemons(151);
+fetchPokemons(6);
 
 console.log("Gracias por usar nuestra pokedex");
 
@@ -38,8 +38,8 @@ const typeColors = {
 // const reload = document.getElementById('reload');
 // btn5.addEventListener('click', _ => location.reload());
 
-// getCache();
-// listaDePokemones();
+getCache();
+listaDePokemones();
 
 
 // askName();

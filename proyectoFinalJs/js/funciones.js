@@ -54,7 +54,9 @@ const listaBag = () => {
         divBag.innerHTML = bagHTML;
 
     }
-    //listado de pokemones sueltos
+    //************
+    //listado de pokemones sueltos/sin atrapar
+    //////////////    
 const listaDePokemones = () => {
     const divPokemon = document.querySelector("#pokemones");
 
@@ -78,41 +80,52 @@ const listaDePokemones = () => {
 
 }
 
+//************
+// Mediante click en el boton añade un pokemon a la lista
+//////////////
 const eventoAñadirPokemon = () => {
-    const botonAtraparPokemon = document.getElementsByClassName("añadirPokemon");
-    for (const boton of botonAtraparPokemon) {
-        boton.onclick = añadirPokemon;
+        const botonAtraparPokemon = document.getElementsByClassName("añadirPokemon");
+        for (const boton of botonAtraparPokemon) {
+            boton.onclick = añadirPokemon;
+        }
+        console.log(añadirPokemon)
+
     }
-
-}
-
+    //************
+    // mediante click consulta si quieres atrapar al pokemon o no
+    //////////////
 const añadirPokemon = e => {
-    const id = e.target.id;
-    const pokemon = arrayPokemon.find(p => p.id == id);
-    swal({
-            title: `Seleccionaste a ${pokemon.nombre}`,
-            text: "Una vez elegido no podrás volver atrás. ¿Desea continuar?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: false,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-                swal(`Elegiste a ${pokemon.nombre} como tu pokemon inicial`, "¡Descubre sus habilidades!", "success");
-                BAG.push(pokemon)
-                updateCache();
-                listaBag();
-            } else {
-                swal("No elegiste ningún pokemon inicial", "Elija uno", "error");
-            }
-        });
-}
-
+        const id = e.target.id;
+        const pokemon = arrayPokemon.find(p => p.id == id);
+        swal({
+                title: `Seleccionaste a ${pokemon.nombre}`,
+                text: "Una vez elegido no podrás volver atrás. ¿Desea continuar?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: false,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal(`Elegiste a ${pokemon.nombre} como parte de tu equipo pokemon`, "¡Descubre sus habilidades!", "success");
+                    BAG.push(pokemon)
+                    updateCache();
+                    listaBag();
+                } else {
+                    swal("No elegiste ningún pokemon inicial", "Elija uno", "error");
+                }
+            });
+    }
+    //************
+    // actualiza el cache
+    //////////////
 const updateCache = () => {
     const bagJSON = JSON.stringify(BAG);
     localStorage.setItem("bag", bagJSON);
 }
 
+//************
+// obtiene el cache guardado
+//////////////
 const getCache = () => {
         bagJSON = localStorage.getItem("bag");
         if (bagJSON) {
@@ -120,73 +133,9 @@ const getCache = () => {
         }
         listaBag();
     }
-    /////////////////////////////////////////////////////////////////////////////////
-PKM_TRAINER = []
-
-const namePokemonTrainer = () => {
-
-    //Pido el genero
-    gender = prompt("Ingrese genero (m o f): ").toLocaleLowerCase()
-
-
-    // if(gender != "m" && gender != "f"){
-    //   Toastify({
-    //     text: "Ingreso invalido",
-    //     duration: 10000,
-    //     gravity: 'bottom',
-    //     position: 'left',
-    //     className: "toastifyError",
-    //     }).showToast();
-    // }
-
-    //valido el genero
-    while (gender != "m" && gender != "f") {
-        gender = prompt("Reingrese genero  con las letras 'm' o 'f': ").toLocaleLowerCase()
-    }
-
-    //Pido el nombre
-    trainer = prompt("Ingrese nombre: ")
-
-    //valido el nombre
-    while (trainer == "") {
-        trainer = prompt("Reingrese nombre: ")
-    }
-
-    //Guardo el nombre
-    trainerNameJSON = localStorage.setItem("name", trainer)
-
-    // declaro los mensajes 
-    const holaF = "Bienvenida entrenadora " + trainer;
-    const holaM = "Bienvenido entrenador " + trainer;
-
-    // con el ternario saludo a quien corresponda
-    gender == "m" ? swal(holaM) : swal(holaF);
-
-    return trainerNameJSON;
-};
-
-//Desafio: Fetch en tu proyecto
-
-const updateCacheTrainer = () => {
-    const trainerNameJSON = JSON.stringify(PKM_TRAINER);
-    localStorage.setItem("name", trainerNameJSON);
-}
-
-const getCacheTrainer = () => {
-    trainerNameJSON = localStorage.getItem("name");
-    if (trainerNameJSON) {
-        PKM_TRAINER = JSON.parse(trainerNameJSON);
-    }
-    askName()
-}
-
-
-const askName = () => {
-    if (PKM_TRAINER <= []) {
-        namePokemonTrainer()
-    }
-}
-
+    //************
+    // Llamo a la api y obtengo el pokemon segun el id que completo
+    //////////////
 const fetchPokemon = (id) => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
         .then((response => response.json()))
@@ -195,12 +144,18 @@ const fetchPokemon = (id) => {
         })
 }
 
+//************
+// establezco un numero hasta el cual quiero mostrar el id de cada pokemon
+//////////////
 const fetchPokemons = (number) => {
     for (let i = 1; i <= number; i++) {
         fetchPokemon(i);
     }
 }
 
+//************
+// creo una mini-card de pokemon con la imagen, id y nombre
+//////////////
 const createPokemon = (pokemon) => {
     const card = document.createElement('div');
     card.classList.add('pokemon-block');
@@ -221,15 +176,36 @@ const createPokemon = (pokemon) => {
     name.classList.add('name');
     name.textContent = pokemon.name.toUpperCase()
 
+    const btnAddPkm = document.createElement('button');
+    btnAddPkm.classList.add('btnAddPkm');
+    btnAddPkm.textContent = `Añadir a mi equipo`
+
 
     card.appendChild(spriteContainer);
     card.appendChild(number);
     card.appendChild(name);
+    card.appendChild(btnAddPkm);
 
     pokemonContainer.appendChild(card);
+    addEventPokemon()
 }
 
 
+const addEventPokemon = () => {
+    const btnAddPkm = document.getElementsByClassName('btnAddPkm')
+    for (const btn of btnAddPkm) {
+        btn.onclick = addPokemon
+    }
+}
+
+const addPokemon = e => {
+        const id = e.target.id
+        const number = data.find(p => p.id == id)
+        console.log(number)
+    }
+    //************
+    // busca el pokemon para mostrar la card
+    //////////////
 const searchPokemon = event => {
     event.preventDefault();
     const { value } = event.target.pokemon;
@@ -239,6 +215,9 @@ const searchPokemon = event => {
         .catch(err => renderNotFound())
 }
 
+//************
+// obtenemos la imagen y los datos del pokemon
+//////////////
 const renderPokemonData = data => {
     const sprite = data.sprites.front_default;
     const { stats, types } = data;
@@ -251,7 +230,9 @@ const renderPokemonData = data => {
     renderPokemonStats(stats);
 }
 
-
+//************
+// seteamos la cant y el color de tipo de pokemon (en caso de que tenga 1 o 2 tipos )
+//////////////
 const setCardColor = types => {
     const colorOne = typeColors[types[0].type.name];
     const colorTwo = types[1] ? typeColors[types[1].type.name] : typeColors.default;
@@ -259,6 +240,9 @@ const setCardColor = types => {
     pokeImg.style.backgroundSize = ' 5px 5px';
 }
 
+//************
+// colocamos en el DOM los tipos
+//////////////
 const renderPokemonTypes = types => {
     pokeTypes.innerHTML = '';
     types.forEach(type => {
@@ -269,6 +253,9 @@ const renderPokemonTypes = types => {
     });
 }
 
+//************
+// llamo a las stats  y las colocamos junto a su cantidad
+//////////////
 const renderPokemonStats = stats => {
     pokeStats.innerHTML = '';
     stats.forEach(stat => {
@@ -283,6 +270,9 @@ const renderPokemonStats = stats => {
     });
 }
 
+//************
+// si no encuentra el pokemon muestra una carga anunciando que no encontro el pokemon
+//////////////
 const renderNotFound = () => {
     pokeName.textContent = 'No encontrado';
     pokeImg.setAttribute('src', './img/silueta.png');
